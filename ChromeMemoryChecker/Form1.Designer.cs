@@ -33,18 +33,20 @@
             this.clmMemory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lblTotal = new System.Windows.Forms.Label();
+            this.clmDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lstvMain
             // 
             this.lstvMain.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.clmDescription,
             this.clmName,
             this.clmMemory});
             this.lstvMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstvMain.Location = new System.Drawing.Point(3, 23);
             this.lstvMain.Name = "lstvMain";
-            this.lstvMain.Size = new System.Drawing.Size(278, 235);
+            this.lstvMain.Size = new System.Drawing.Size(314, 235);
             this.lstvMain.TabIndex = 0;
             this.lstvMain.UseCompatibleStateImageBehavior = false;
             this.lstvMain.View = System.Windows.Forms.View.Details;
@@ -71,7 +73,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(284, 261);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(320, 261);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // lblTotal
@@ -83,11 +85,16 @@
             this.lblTotal.TabIndex = 1;
             this.lblTotal.Text = "label1";
             // 
+            // clmDescription
+            // 
+            this.clmDescription.Text = "Process Description";
+            this.clmDescription.Width = 107;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(320, 261);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -105,6 +112,7 @@
         private System.Windows.Forms.ColumnHeader clmMemory;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label lblTotal;
+        private System.Windows.Forms.ColumnHeader clmDescription;
     }
 }
 

@@ -31,11 +31,13 @@ namespace ChromeMemoryChecker
             double memgb = memkb / 1024.0 / 1024.0;
             //Console.WriteLine(memgb.ToString());
             
+            
+
             lblTotal.Text = string.Format("Total usage in Gb: {0:0.00}Gb over {1} processes", memgb, chrome.Count());
 
             
 
-            lstvMain.Items.AddRange(chrome.Select(x => new ListViewItem(new[] { x.ProcessName, string.Format("{0:0.000}", x.PrivateMemorySize64 / 1024.0 / 1024.0)})).ToArray());
+            lstvMain.Items.AddRange(chrome.Select(x => new ListViewItem(new[] { x.MainModule.FileVersionInfo.FileDescription, x.ProcessName, string.Format("{0:0.000}", x.PrivateMemorySize64 / 1024.0 / 1024.0)})).ToArray());
         }
     }
 }
