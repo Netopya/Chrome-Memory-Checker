@@ -30,10 +30,13 @@ namespace ChromeMemoryChecker
             double memkb = ((double)memb) / (double)1024.0;
             double memgb = memkb / 1024.0 / 1024.0;
             //Console.WriteLine(memgb.ToString());
-            
-            
 
-            lblTotal.Text = string.Format("Total usage in Gb: {0:0.00}Gb over {1} processes", memgb, chrome.Count());
+
+
+            //lblTotal.Text = string.Format("Total usage in Gb: {0:0.00}Gb over {1} processes", memgb, chrome.Count());
+            lblProcessCount.Text = chrome.Count().ToString();
+            lblChromeUsage.Text = string.Format("{0:0.00} Gb", memgb);
+
 
             picIcon.Image = Icon.ExtractAssociatedIcon(chrome.First().MainModule.FileName).ToBitmap();
 
