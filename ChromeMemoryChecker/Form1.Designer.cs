@@ -30,14 +30,16 @@
         {
             this.components = new System.ComponentModel.Container();
             this.lstvMain = new System.Windows.Forms.ListView();
+            this.clmIcons = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmMemory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.imgListProcessIcons = new System.Windows.Forms.ImageList(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lblTotal = new System.Windows.Forms.Label();
-            this.imgListProcessIcons = new System.Windows.Forms.ImageList(this.components);
-            this.clmIcons = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.picIcon = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // lstvMain
@@ -47,56 +49,35 @@
             this.clmDescription,
             this.clmName,
             this.clmMemory});
+            this.tableLayoutPanel1.SetColumnSpan(this.lstvMain, 2);
             this.lstvMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lstvMain.Location = new System.Drawing.Point(3, 23);
+            this.lstvMain.Location = new System.Drawing.Point(3, 63);
             this.lstvMain.Name = "lstvMain";
-            this.lstvMain.Size = new System.Drawing.Size(389, 235);
+            this.lstvMain.Size = new System.Drawing.Size(389, 195);
             this.lstvMain.SmallImageList = this.imgListProcessIcons;
             this.lstvMain.TabIndex = 0;
             this.lstvMain.UseCompatibleStateImageBehavior = false;
             this.lstvMain.View = System.Windows.Forms.View.Details;
             // 
+            // clmIcons
+            // 
+            this.clmIcons.Text = "";
+            this.clmIcons.Width = 30;
+            // 
             // clmDescription
             // 
-            this.clmDescription.DisplayIndex = 0;
             this.clmDescription.Text = "Process Description";
             this.clmDescription.Width = 107;
             // 
             // clmName
             // 
-            this.clmName.DisplayIndex = 1;
             this.clmName.Text = "Process Name";
             this.clmName.Width = 95;
             // 
             // clmMemory
             // 
-            this.clmMemory.DisplayIndex = 2;
             this.clmMemory.Text = "Memory Usage";
             this.clmMemory.Width = 98;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.lstvMain, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblTotal, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(395, 261);
-            this.tableLayoutPanel1.TabIndex = 1;
-            // 
-            // lblTotal
-            // 
-            this.lblTotal.AutoSize = true;
-            this.lblTotal.Location = new System.Drawing.Point(3, 0);
-            this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(35, 13);
-            this.lblTotal.TabIndex = 1;
-            this.lblTotal.Text = "label1";
             // 
             // imgListProcessIcons
             // 
@@ -104,10 +85,41 @@
             this.imgListProcessIcons.ImageSize = new System.Drawing.Size(16, 16);
             this.imgListProcessIcons.TransparentColor = System.Drawing.Color.Transparent;
             // 
-            // clmIcons
+            // tableLayoutPanel1
             // 
-            this.clmIcons.Text = "";
-            this.clmIcons.Width = 30;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.lstvMain, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.lblTotal, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.picIcon, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(395, 261);
+            this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Location = new System.Drawing.Point(43, 0);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(35, 13);
+            this.lblTotal.TabIndex = 1;
+            this.lblTotal.Text = "label1";
+            // 
+            // picIcon
+            // 
+            this.picIcon.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picIcon.Location = new System.Drawing.Point(3, 3);
+            this.picIcon.Name = "picIcon";
+            this.picIcon.Size = new System.Drawing.Size(34, 54);
+            this.picIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.picIcon.TabIndex = 2;
+            this.picIcon.TabStop = false;
             // 
             // Form1
             // 
@@ -120,6 +132,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -134,6 +147,7 @@
         private System.Windows.Forms.ColumnHeader clmDescription;
         private System.Windows.Forms.ColumnHeader clmIcons;
         private System.Windows.Forms.ImageList imgListProcessIcons;
+        private System.Windows.Forms.PictureBox picIcon;
     }
 }
 
