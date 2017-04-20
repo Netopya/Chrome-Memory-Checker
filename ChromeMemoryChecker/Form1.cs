@@ -35,9 +35,28 @@ namespace ChromeMemoryChecker
 
             lblTotal.Text = string.Format("Total usage in Gb: {0:0.00}Gb over {1} processes", memgb, chrome.Count());
 
-            
 
-            lstvMain.Items.AddRange(chrome.Select(x => new ListViewItem(new[] { x.MainModule.FileVersionInfo.FileDescription, x.ProcessName, string.Format("{0:0.000}", x.PrivateMemorySize64 / 1024.0 / 1024.0)})).ToArray());
+
+            //lstvMain.Items.AddRange(chrome.Select(x => new ListViewItem(new[] { "", x.MainModule.FileVersionInfo.FileDescription, x.ProcessName, string.Format("{0:0.000}", x.PrivateMemorySize64 / 1024.0 / 1024.0)}, 0)).ToArray());
+            //new ListViewItem(
+
+            int count = 0;
+            foreach(var chromep in chrome)
+            {
+                var icon = Icon.ExtractAssociatedIcon(chromep.MainModule.FileName);
+                imgListProcessIcons.Images.Add(icon);
+                lstvMain.Items.Add(new ListViewItem("", count));
+                var item = lstvMain.Items[count];
+                item.SubItems.Add(new ListViewItem.ListViewSubItem(item, chromep.MainModule.FileVersionInfo.FileDescription));
+                item.SubItems.Add(new ListViewItem.ListViewSubItem(item, chromep.ProcessName));
+                item.SubItems.Add(new ListViewItem.ListViewSubItem(item, string.Format("{0:0.000}", chromep.PrivateMemorySize64 / 1024.0 / 1024.0)));
+
+                count++;
+                //lstvMain.Items[imgListProcessIcons.Images.Count - 1].ImageIndex = imgListProcessIcons.Images.Count - 1;
+            }
+
+            lstvMain.Columns[0].DisplayIndex = 0;
+            lstvMain.Columns[0].Width = 24;
         }
     }
 }

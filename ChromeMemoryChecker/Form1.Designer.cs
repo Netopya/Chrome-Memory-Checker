@@ -28,36 +28,49 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lstvMain = new System.Windows.Forms.ListView();
+            this.clmDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmMemory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.lblTotal = new System.Windows.Forms.Label();
-            this.clmDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.imgListProcessIcons = new System.Windows.Forms.ImageList(this.components);
+            this.clmIcons = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lstvMain
             // 
             this.lstvMain.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.clmIcons,
             this.clmDescription,
             this.clmName,
             this.clmMemory});
             this.lstvMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstvMain.Location = new System.Drawing.Point(3, 23);
             this.lstvMain.Name = "lstvMain";
-            this.lstvMain.Size = new System.Drawing.Size(314, 235);
+            this.lstvMain.Size = new System.Drawing.Size(389, 235);
+            this.lstvMain.SmallImageList = this.imgListProcessIcons;
             this.lstvMain.TabIndex = 0;
             this.lstvMain.UseCompatibleStateImageBehavior = false;
             this.lstvMain.View = System.Windows.Forms.View.Details;
             // 
+            // clmDescription
+            // 
+            this.clmDescription.DisplayIndex = 0;
+            this.clmDescription.Text = "Process Description";
+            this.clmDescription.Width = 107;
+            // 
             // clmName
             // 
+            this.clmName.DisplayIndex = 1;
             this.clmName.Text = "Process Name";
             this.clmName.Width = 95;
             // 
             // clmMemory
             // 
+            this.clmMemory.DisplayIndex = 2;
             this.clmMemory.Text = "Memory Usage";
             this.clmMemory.Width = 98;
             // 
@@ -73,7 +86,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(320, 261);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(395, 261);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // lblTotal
@@ -85,16 +98,22 @@
             this.lblTotal.TabIndex = 1;
             this.lblTotal.Text = "label1";
             // 
-            // clmDescription
+            // imgListProcessIcons
             // 
-            this.clmDescription.Text = "Process Description";
-            this.clmDescription.Width = 107;
+            this.imgListProcessIcons.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
+            this.imgListProcessIcons.ImageSize = new System.Drawing.Size(16, 16);
+            this.imgListProcessIcons.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // clmIcons
+            // 
+            this.clmIcons.Text = "";
+            this.clmIcons.Width = 30;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(320, 261);
+            this.ClientSize = new System.Drawing.Size(395, 261);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -113,6 +132,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.ColumnHeader clmDescription;
+        private System.Windows.Forms.ColumnHeader clmIcons;
+        private System.Windows.Forms.ImageList imgListProcessIcons;
     }
 }
 
