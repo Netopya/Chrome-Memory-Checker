@@ -47,6 +47,7 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.tmrMain = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picIcon)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
@@ -73,7 +74,7 @@
             // clmIcons
             // 
             this.clmIcons.Text = "";
-            this.clmIcons.Width = 30;
+            this.clmIcons.Width = 24;
             // 
             // clmDescription
             // 
@@ -232,6 +233,12 @@
             this.linkLabel1.Text = "netopyaplanet.com";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
+            // tmrMain
+            // 
+            this.tmrMain.Enabled = true;
+            this.tmrMain.Interval = 1000;
+            this.tmrMain.Tick += new System.EventHandler(this.tmrMain_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -272,6 +279,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Timer tmrMain;
     }
 }
 
