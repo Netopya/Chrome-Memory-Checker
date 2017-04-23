@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.lstvMain = new System.Windows.Forms.ListView();
+            this.lstvMain = new ListViewNF();
             this.clmIcons = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -262,7 +262,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView lstvMain;
+        private ListViewNF lstvMain;
         private System.Windows.Forms.ColumnHeader clmName;
         private System.Windows.Forms.ColumnHeader clmMemory;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;

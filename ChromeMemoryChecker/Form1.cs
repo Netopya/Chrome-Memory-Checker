@@ -24,86 +24,65 @@ namespace ChromeMemoryChecker
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            var process = Process.GetProcesses();
-            var chrome = process.Where(x => x.ProcessName.Contains("chrome"));
-
-            //Console.WriteLine(string.Join(System.Environment.NewLine, chrome.Select(x => x.ProcessName)));
-
-            var mems = chrome.Select(x => x.PrivateMemorySize64);
-            long memb = mems.Aggregate((long)0, (x, y) => x + y);
-            double memkb = ((double)memb) / (double)1024.0;
-            double memgb = memkb / 1024.0 / 1024.0;
-            //Console.WriteLine(memgb.ToString());
-
-
-
-            //lblTotal.Text = string.Format("Total usage in Gb: {0:0.00}Gb over {1} processes", memgb, chrome.Count());
-            lblProcessCount.Text = chrome.Count().ToString();
-            lblChromeUsage.Text = string.Format("{0:0.00} Gb", memgb);
-
-
-            picIcon.Image = Icon.ExtractAssociatedIcon(chrome.First().MainModule.FileName).ToBitmap();
-
-            //lstvMain.Items.AddRange(chrome.Select(x => new ListViewItem(new[] { "", x.MainModule.FileVersionInfo.FileDescription, x.ProcessName, string.Format("{0:0.000}", x.PrivateMemorySize64 / 1024.0 / 1024.0)}, 0)).ToArray());
-            //new ListViewItem(
-
-            //int count = 0;
-            //foreach(var chromep in chrome)
-            {
-                //var icon = Icon.ExtractAssociatedIcon(chromep.MainModule.FileName);
-                //imgListProcessIcons.Images.Add(icon);
-                //lstvMain.Items.Add(new ListViewItem("", count));
-                //var item = lstvMain.Items[count];
-                //item.SubItems.Add(new ListViewItem.ListViewSubItem(item, chromep.MainModule.FileVersionInfo.FileDescription));
-                //item.SubItems.Add(new ListViewItem.ListViewSubItem(item, chromep.ProcessName));
-                //item.SubItems.Add(new ListViewItem.ListViewSubItem(item, string.Format("{0:0.000}", chromep.PrivateMemorySize64 / 1024.0 / 1024.0)));
-
-                //count++;
-                //lstvMain.Items[imgListProcessIcons.Images.Count - 1].ImageIndex = imgListProcessIcons.Images.Count - 1;
-            }
-
-            //lstvMain.Columns[0].DisplayIndex = 0;
-            //lstvMain.Columns[0].Width = 24;
+            UpdateHeader(GetChromeProcesses());
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            // Navigate to the blog
             Process.Start("http://www.netopyaplanet.com/");
         }
 
-        private void tmrMain_Tick(object sender, EventArgs e)
+        private IEnumerable<Process> GetChromeProcesses()
         {
-            var process = Process.GetProcesses();
-            var chrome = process.Where(x => x.ProcessName.Contains("chrome"));
+            var processes = Process.GetProcesses();
+            return processes.Where(x => x.ProcessName.Contains("chrome"));
+        }
 
-            var mems = chrome.Select(x => x.PrivateMemorySize64);
+        // Update general process information
+        private void UpdateHeader(IEnumerable<Process> chromeProcesses)
+        {
+            // Calculate total usage in gb
+            var mems = chromeProcesses.Select(x => x.PrivateMemorySize64);
             long memb = mems.Aggregate((long)0, (x, y) => x + y);
             double memkb = ((double)memb) / (double)1024.0;
             double memgb = memkb / 1024.0 / 1024.0;
 
-            lblProcessCount.Text = chrome.Count().ToString();
+            lblProcessCount.Text = chromeProcesses.Count().ToString();
             lblChromeUsage.Text = string.Format("{0:0.00} Gb", memgb);
 
-            if(picIcon.Image == null && chrome.Any())
+            // Set the display icon if there is none found
+            if (picIcon.Image == null && chromeProcesses.Any())
             {
-                picIcon.Image = Icon.ExtractAssociatedIcon(chrome.First().MainModule.FileName).ToBitmap();
+                picIcon.Image = Icon.ExtractAssociatedIcon(chromeProcesses.First().MainModule.FileName).ToBitmap();
             }
+        }
 
-            foreach(var chromeProcess in chromeProcesses)
+        private void tmrMain_Tick(object sender, EventArgs e)
+        {
+            var chrome = GetChromeProcesses();
+
+            UpdateHeader(chrome);
+
+            // Update cached processes
+            foreach (var chromeProcess in chromeProcesses)
             {
                 chromeProcess.Update();
             }
 
             chromeProcesses.RemoveAll(x => x.state == ProcessState.Closed);
 
-            //int count = 0;
+            // Iterate through all found processes
             foreach (var chromep in chrome)
             {
+                // Ignore any processes already cached
                 if (chromeProcesses.Any(x => x.EqualsProcess(chromep)))
                     continue;
 
                 int imageIndex;
                 string chromeIconPath = chromep.MainModule.FileName;
+
+                // Check to see if the program's icon has already been found
                 if(iconMap.ContainsKey(chromeIconPath))
                 {
                     imageIndex = iconMap[chromeIconPath];
@@ -117,16 +96,8 @@ namespace ChromeMemoryChecker
                     IconIndex++;
                 }
 
+                // Create a new process handler for this class
                 chromeProcesses.Add(new ChromeProcess(chromep, imageIndex, lstvMain));
-
-                //lstvMain.Items.Add(new ListViewItem("", count));
-                //var item = lstvMain.Items[count];
-                //item.SubItems.Add(new ListViewItem.ListViewSubItem(item, chromep.MainModule.FileVersionInfo.FileDescription));
-                //item.SubItems.Add(new ListViewItem.ListViewSubItem(item, chromep.ProcessName));
-                //item.SubItems.Add(new ListViewItem.ListViewSubItem(item, string.Format("{0:0.000}", chromep.PrivateMemorySize64 / 1024.0 / 1024.0)));
-
-                //count++;
-                //lstvMain.Items[imgListProcessIcons.Images.Count - 1].ImageIndex = imgListProcessIcons.Images.Count - 1;
             }
         }
     }

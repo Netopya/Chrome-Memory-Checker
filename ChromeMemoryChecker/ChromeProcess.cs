@@ -17,6 +17,8 @@ namespace ChromeMemoryChecker
         Closed
     }
 
+    // A class to hold
+    // a found chrome process
     class ChromeProcess
     {
 
@@ -24,7 +26,6 @@ namespace ChromeMemoryChecker
         ListView parentListView;
         ListViewItem listItem;
         public ProcessState state { get; private set; }
-        long oldMemory;
 
         public ChromeProcess(Process chromeProcess, int imageIndex, ListView parentListView)
         {
@@ -34,10 +35,11 @@ namespace ChromeMemoryChecker
             listItem = new ListViewItem(new[] { "",
                 chromeProcess.MainModule.FileVersionInfo.FileDescription,
                 chromeProcess.ProcessName,
-                string.Format("{0:0.000} Mb", chromeProcess.WorkingSet64 / 1024.0 / 1024.0)
+                string.Format("{0:0.000} Mb", chromeProcess.PrivateMemorySize64 / 1024.0 / 1024.0)
             }, imageIndex);
 
-            listItem.BackColor = Color.Green;
+            // Change color to green for opening processes
+            listItem.BackColor = Color.LimeGreen;
             state = ProcessState.Opening;
 
             parentListView.Items.Add(listItem);
@@ -45,6 +47,7 @@ namespace ChromeMemoryChecker
 
         public void Update()
         {
+            // If the process has closed, set the list item to red, then remove it
             if(chromeProcess.HasExited)
             {
                 if (state == ProcessState.Closing)
@@ -66,22 +69,15 @@ namespace ChromeMemoryChecker
                     listItem.BackColor = Color.White;
                 }
 
+                // Update the memory count
+
                 chromeProcess.Refresh();
 
-                //long memory = Process.GetProcessById(chromeProcess.Id).PrivateMemorySize64;
-                long memory = chromeProcess.PrivateMemorySize64;
-
-                if (memory != oldMemory)
-                    Console.WriteLine("Memory Changed! {2} from {0:0.000} to {1:0.000}", oldMemory / 1024.0 / 1024.0, memory / 1024.0 / 1024.0, chromeProcess.Id);
-
-                oldMemory = memory;
-
-                //listItem.SubItems[3].Text = string.Format("{0:0.00000000} Mb", memory / 1024.0 / 1024.0);
-
-                listItem.SubItems[3].Text = string.Format("Memory Changed! {2} from {0:0.000} to {1:0.000}", oldMemory / 1024.0 / 1024.0, memory / 1024.0 / 1024.0, chromeProcess.Id);
+                listItem.SubItems[3].Text = string.Format("{0:0.000} Mb", chromeProcess.PrivateMemorySize64 / 1024.0 / 1024.0);
             }
         }
 
+        // Check to see if this holder matches a process
         public bool EqualsProcess(Process process)
         {
             return chromeProcess.Id == process.Id;
