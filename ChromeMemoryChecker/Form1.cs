@@ -61,5 +61,10 @@ namespace ChromeMemoryChecker
             lstvMain.Columns[0].DisplayIndex = 0;
             lstvMain.Columns[0].Width = 24;
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("http://www.netopyaplanet.com/");
+        }
     }
 }
