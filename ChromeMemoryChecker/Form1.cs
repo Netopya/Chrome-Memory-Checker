@@ -75,8 +75,8 @@ namespace ChromeMemoryChecker
             // Iterate through all found processes
             foreach (var chromep in chrome)
             {
-                // Ignore any processes already cached
-                if (chromeProcesses.Any(x => x.EqualsProcess(chromep)))
+                // Ignore any processes already cached or that has already closed
+                if (chromeProcesses.Any(x => x.EqualsProcess(chromep)) || chromep.HasExited)
                     continue;
 
                 int imageIndex;
